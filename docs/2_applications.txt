@@ -1,0 +1,5 @@
+1. In a large-scale project, there can be several features like dashboard, chat, user authentication,
+permission, groups, pages etc.
+2. Each of these features are done in a separate folder and this folder is called as "app" in django
+3. "python manage.py startapp" command is used to start a new app in django
+4. After you create an application, you must register that application in settings.py
