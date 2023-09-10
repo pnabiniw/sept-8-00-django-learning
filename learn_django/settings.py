@@ -40,7 +40,7 @@ ROOT_URLCONF = 'learn_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'temps'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

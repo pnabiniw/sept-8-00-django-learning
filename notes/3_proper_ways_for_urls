@@ -1,0 +1,14 @@
+Proper Ways for creating URLS
+
+1. It is better to use hyphen ('-') than underscore (_) for multiple words in the urls
+    http://127.0.0.1:8000/hello_world/ (Don't)
+    http://127.0.0.1:8000/hello-world/ (Don't)
+
+2. URLs should be readable. We should be abe to guess the content of the URL just by seeing the URL
+    http://127.0.0.1:8000/students/
+    http://127.0.0.1:8000/students/2/
+    http://127.0.0.1:8000/students/2/home/
+
+3. It is better not to use ids in the URL
+    http://127.0.0.1:8000/students/jon/  (Do)
+    http://127.0.0.1:8000/students/2/   (Don't)
