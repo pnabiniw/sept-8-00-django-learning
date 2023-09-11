@@ -12,7 +12,14 @@ from django.http import HttpResponse
 
 def home(request):
     # return render(request, template_name="home.html")
-    return render(request, template_name="myapp/test.html")
+    people_info = [
+        {"first": "Jon", "last": "harris", "address": "KTM"},
+        {"first": "Jane", "last": "Bolton", "address": "PKR"},
+        {"first": "Ken", "last": "Wayne", "address": "LTP"},
+        {"first": "Hary", "last": "harris", "address": "BKT"},
+    ]
+    return render(request, template_name="myapp/test.html",
+                  context={"heading": "Student Information", "infos": people_info})
 
 
 def python(request):
