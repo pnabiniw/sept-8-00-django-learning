@@ -25,7 +25,7 @@ def home(request):
 def python(request):
     name = request.GET.get("name")
     print(name)
-    return HttpResponse("<h1>I'm Learning Python</h1>")
+    return render(request, template_name="myapp/test2.html")
 
 
 def test(request):
@@ -35,3 +35,7 @@ def test(request):
     name = request.GET.get("name")
     age = request.GET.get("age")
     return HttpResponse(f"<h1>Hello my name is {name}. I'm {age}</h1>")
+
+
+def portfolio(request):
+    return render(request, template_name="myapp/portfolio.html")
