@@ -2,4 +2,18 @@ from django.shortcuts import render
 
 
 def main(request):
-    return render(request, template_name='temp_inheritance/home.html')
+    people = [
+        {"name": "Ram", "age": 30, "address": "KTM"},
+        {"name": "Hari", "age": 24, "address": "KTM"},
+        {"name": "Sita", "age": 45, "address": "BKT"},
+    ]
+    return render(request, template_name='temp_inheritance/home.html', context={"people": people})
+
+
+def features(request):
+    items = [
+        {"name": "laptop", "feature": "A portable computer that can be used anywhere"},
+        {"name": "Mouse", "feature": "A clicking input device of a computer"},
+        {"name": "Keyboard", "feature": "An input device with keys"},
+    ]
+    return render(request, template_name='temp_inheritance/features.html', context={"items": items})
