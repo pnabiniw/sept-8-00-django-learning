@@ -17,3 +17,12 @@ def features(request):
         {"name": "Keyboard", "feature": "An input device with keys"},
     ]
     return render(request, template_name='temp_inheritance/features.html', context={"items": items})
+
+
+def pricing(request):
+    items = [
+        {"name": "laptop", "price": "5000"},
+        {"name": "Mouse", "price": 120000},
+        {"name": "Keyboard", "price": 12000},
+    ]
+    return render(request, 'temp_inheritance/pricing.html', {"goods": items})
