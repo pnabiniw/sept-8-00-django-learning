@@ -9,3 +9,37 @@ all the students of the table.
 
     Here "Student.objects.all()" is an ORM to get all the students. It's
     equivalent raw query is "SELECT * FROM STUDENT"
+
+CRUD ORMs
+Let's take "Student" models as an example
+
+1. Student.objects.all()
+    - This ORM returns all the objects from the student table as a queryset
+    - Queryset is a list-like object. But unlike list, Querysets are immutable
+    - Queryset also do not support negative indexing
+    - We can get the elements of a queryset by indexing or by looping
+
+2. Student.objects.filter(id=1)
+   Student.objects.get(id=1)
+
+    - .filter() returns a queryset of objects whereas .get() returns a single object.
+    - If we try to filter from the values not present in the table then .filter() returns an empty
+    queryset.
+    - .get() raises error for the following cases
+        i) If we try to get the value not present in the table
+            Student.objects.get(id=1100) then it raises Object DoesNotExist error
+        ii) If we try to get the value that may occurs multiple times in the table
+            Student.objects.filter(name="Jon") then it raises MultipleObjectsReturned error
+        iii) Thus, it is always a better idea to get from the unique value in the table like id, username,
+        email, phone etc. And, .get() should be used with try...except block
+
+3. Student.objects.create(name="Jane", age=40, email="jane@email.com", address="KTM")
+4. Student.objects.filter(id=2).update(name="Ram", age=60)
+   Student.objects.all().update(name="Ram")
+5. Student.objects.filter(id=2).delete()
+   Student.objects.all().delete()
+
+
+students = Student.objects.all()
+student = students[0]
+s.name
