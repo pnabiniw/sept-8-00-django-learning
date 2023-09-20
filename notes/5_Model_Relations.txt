@@ -1,0 +1,32 @@
+There are three types of Model Relations
+    - One-to-One Relation
+    - One-to-Many Relation
+    - Many-to-Many Relation
+
+1. One-to-One Relation
+    => In one-one relation, relations are maintained uniquely.
+    If Student is a model and StudentProfile is the model with one-one relation
+    with Student table then, "student_id" is unique in the StudentProfile table.
+    Following are the related ORMs
+
+    i) StudentProfile.objects.create(roll_no=2, contact=989890988, student_id=1)
+    ii) student = Student.objects.get(id=2)
+        StudentProfile.objects.create(roll_no=1, contact=989098998, student=student)
+
+    iii) sp = StudentProfile.objects.get(id=2)
+         print(sp.contact)
+         print(sp.roll)
+         print(sp.student.name)
+         print(sp.student.age)
+         print(sp.student.email)
+
+    iv) StudentProfile.objects.filter(roll_no=2, student__name="Jon")
+    v)  sp = StudentProfile.objects.get(id=2)
+        student = sp.student
+        student.name = "Ram"
+        student.age = 40
+        student.save()
+
+    v) sp = StudentProfile.objects.get(id=2)
+       student = sp.student
+       student.delete()
