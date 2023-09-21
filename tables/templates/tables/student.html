@@ -10,6 +10,8 @@
             <th scope="col">Age</th>
             <th scope="col">Address</th>
             <th scope="col">Bio</th>
+            <th scope="col">Roll Number</th>
+            <th scope="col">Contact</th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +23,8 @@
                 <td>{{ student.age }}</td>
                 <td>{{ student.address }}</td>
                 <td>{{ student.bio }}</td>
+                <td>{{ student.studentprofile.roll_no }}</td>
+                <td>{{ student.studentprofile.contact }}</td>
             </tr>
         {% endfor %}
         </tbody>
