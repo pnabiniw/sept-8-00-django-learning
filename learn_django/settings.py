@@ -21,12 +21,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'myapp',
-    'temp_inheritance',
-    'tables',
-    'django_extensions',
+    'django.contrib.staticfiles'
 ]
+
+PROJECT_APPS = ['myapp', 'temp_inheritance', 'tables', 'forms']
+THIRD_PARTY_APP = ['django_extensions']
+
+INSTALLED_APPS += PROJECT_APPS + THIRD_PARTY_APP
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,6 +70,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+from django.db.backends import postgresql
+
+# DATABASES = {
+#     'default': {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "learndjangodb",
+#         "USER": "postgres",
+#         "PASSWORD": "password",
+#         "HOST": "127.0.0.1",
+#         "PORT": 5432
+#     }
+# }
 
 
 # Password validation
