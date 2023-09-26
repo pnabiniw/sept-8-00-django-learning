@@ -1,7 +1,8 @@
 {% extends 'temp_inheritance/base.html' %}
 
 {% block content %}
-    <form class="row g-3">
+    <form class="row g-3" method="post" action="{% url 'student_view' %}">
+    {% csrf_token %}
         <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Name</label>
             <input type="text" class="form-control" id="inputEmail4" name="name">
@@ -27,3 +28,5 @@
         </div>
     </form>
 {% endblock %}
+
+naween321

@@ -1,0 +1,6 @@
+While working with a web application there are several types of request methods,
+get, post, put, patch, delete, head, options
+
+
+get => To get the data from the server we hit "get" request to the server
+post => To send data to the server we hit "post" request to the server
