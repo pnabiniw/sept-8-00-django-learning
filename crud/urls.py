@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import crud_classroom, classroom_delete, classroom_update, crud_student, \
-    add_student, student_detail
+    add_student, student_detail, update_student
 
 
 urlpatterns = [
@@ -9,5 +9,6 @@ urlpatterns = [
     path("student/", crud_student, name="crud_student"),
     path("add-student/", add_student, name="add_student"),
     path("student/<int:id>/", student_detail, name="student_detail"),
+    path("update-student/<int:id>/", update_student, name="update_student"),
     path("", crud_classroom, name="crud_classroom")
 ]

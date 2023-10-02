@@ -6,3 +6,4 @@
 18. Classroom CRUD
 19. Student CRUD
 20. MEDIA
+21. Student Update

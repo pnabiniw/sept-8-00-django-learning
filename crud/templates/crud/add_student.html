@@ -24,13 +24,14 @@
             <label for="inputCity" class="form-label">Contact</label>
             <input type="text" class="form-control" id="inputCity" name="contact">
         </div>
-{#        <div class="col-md-4">#}
-{#            <label for="inputState" class="form-label">State</label>#}
-{#            <select id="inputState" class="form-select">#}
-{#                <option selected>Choose...</option>#}
-{#                <option>...</option>#}
-{#            </select>#}
-{#        </div>#}
+        <div class="col-md-4">
+            <label for="inputState" class="form-label">Classroom</label>
+            <select id="inputState" class="form-select" name="classroom_name">
+                {% for classroom in classrooms %}
+                <option selected>{{ classroom.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <div class="col-md-2">
             <label for="inputZip" class="form-label">Profile Picture</label>
             <input type="file" class="form-control" name="pp">
