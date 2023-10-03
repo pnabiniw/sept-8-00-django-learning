@@ -7,3 +7,4 @@
 19. Student CRUD
 20. MEDIA
 21. Student Update
+22. Django Forms
