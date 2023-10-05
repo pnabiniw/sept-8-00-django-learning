@@ -8,3 +8,4 @@
 20. MEDIA
 21. Student Update
 22. Django Forms
+23. Class Based
