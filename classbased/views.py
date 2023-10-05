@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, FormView
-from crud.models import ClassRoom
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
+
+from crud.models import ClassRoom, Student
 from forms.form import ClassRoomModelForm
 
 
@@ -30,3 +32,33 @@ class ClassRoomTemplateView(TemplateView):
         title = "Classroom"
         context.update(form=form, classrooms=classrooms, title=title)
         return context
+
+
+class ClassRoomView(CreateView):
+    queryset = ClassRoom.objects.all()
+    template_name = "classbased/classroom.html"
+    form_class = ClassRoomModelForm
+    success_url = reverse_lazy('classbased_classroom')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['classrooms'] = ClassRoom.objects.all()
+        context["title"] = "Classroom"
+        return context
+
+
+class StudentView(ListView):
+    queryset = Student.objects.all()
+    template_name = 'classbased/student.html'
+    context_object_name = 'students'
+
+
+class StudentDetailView(DetailView):
+    queryset = Student.objects.all()
+    template_name = 'classbased/student_detail.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(StudentDetailView, self).get_context_data()
+    #     print(context)
+    #     return context
+

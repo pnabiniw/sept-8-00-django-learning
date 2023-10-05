@@ -1,8 +1,10 @@
 {% extends 'crud/base.html' %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
-    <form method="post" action="{% url 'class_temp' %}">
+    <h1>{{ title }}</h1><br>
+    <a style="float: right" class="btn btn-primary"
+       href="{% url 'classbased_student' %}">Student</a>
+    <form method="post" action="{% url 'classbased_classroom' %}">
     {% csrf_token %}
     {{ form }}
     <button type="submit" class="btn btn-primary">Submit</button><br><br>
