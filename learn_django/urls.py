@@ -9,6 +9,7 @@ urlpatterns = [
     path("tables/", include('tables.urls')),
     path("forms/", include('forms.urls')),
     path("classbased/", include('classbased.urls')),
+    path("api/", include("api.urls")),
     path("", include('crud.urls')),
     path("", include("myapp.urls")),
 ]

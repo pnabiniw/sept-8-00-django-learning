@@ -9,3 +9,5 @@
 21. Student Update
 22. Django Forms
 23. Class Based
+23. Class Based Views
+24. Django Rest Framework
