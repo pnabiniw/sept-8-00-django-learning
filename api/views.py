@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from crud.models import Student
+from crud.models import Student, ClassRoom
+
+from .serializers import ClassRoomSerializer, ClassRoomModelSerializer, StudentModelSerializer
 
 
 def hello_world(request):
@@ -70,4 +72,74 @@ class StudentFromDBListView(APIView):
         Student.objects.create(name=name, email=email, age=age, classroom_id=classroom)
         return Response({
             "detail": "Student Created Successfully !!"
+        })
+
+
+class ClassRoomFromDBView(APIView):
+    def get(self, *args, **kwargs):
+        id = kwargs['id']
+        try:
+            classroom = ClassRoom.objects.get(id=id)
+        except ClassRoom.DoesNotExist:
+            return Response({
+                "detail": "Invalid Classroom ID"
+            })
+        # response = {
+        #     "name": classroom.name
+        # }
+        serializer = ClassRoomSerializer(classroom)
+        return Response(serializer.data)
+
+
+class ClassRoomFromDBListView(APIView):
+    def get(self, *args, **kwargs):
+        classrooms = ClassRoom.objects.all()
+        serializer = ClassRoomSerializer(classrooms, many=True)
+        return Response(serializer.data)
+
+    def post(self, *args, **kwargs):
+        # serializer = ClassRoomSerializer(data=self.request.data)
+        serializer = ClassRoomModelSerializer(data=self.request.data)
+        if serializer.is_valid():
+            # name = serializer.validated_data.get("name")
+            # ClassRoom.objects.create(name=name)
+            serializer.save()
+            return Response({
+                "detail": "Classroom Created Successfully !!"
+            })
+        return Response({
+            "detail": "Invalid Request Data !!"
+        })
+
+
+# StudentDetailView, StudentView
+
+class StudentDetailView(APIView):
+    def get(self, *args, **kwargs):
+        id = kwargs['id']
+        try:
+            student = Student.objects.get(id=id)
+        except Student.DoesNotExist:
+            return Response({
+                "detail": "Invalid Student ID"
+            })
+        serializer = StudentModelSerializer(student)
+        return Response(serializer.data)
+
+
+class StudentListView(APIView):
+    def get(self, *args, **kwargs):
+        students = Student.objects.all()
+        serializer = StudentModelSerializer(students, many=True)
+        return Response(serializer.data)
+
+    def post(self, *args, **kwargs):
+        serializer = StudentModelSerializer(data=self.request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                "detail": "Student Added Successfully !!"
+            })
+        return Response({
+            "detail": "Invalid request data"
         })

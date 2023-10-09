@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from tables.models import Student
 from crud.models import ClassRoom
-from .form import ClassRoomForm, ClassRoomModelForm
+from .form import ClassRoomForm, ClassRoomModelForm, StudentModelForm
 
 
 def student_view(request):
@@ -39,3 +39,9 @@ def model_classroom(request):
     classrooms = ClassRoom.objects.all()
     return render(request, template_name="forms/classroom.html",
                   context={"form": form, "classrooms": classrooms})
+
+
+def model_student(request):
+    form = StudentModelForm()
+    return render(request, template_name="forms/model_student.html",
+                  context={"form": form})

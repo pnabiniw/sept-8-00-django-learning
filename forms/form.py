@@ -1,5 +1,5 @@
 from django import forms
-from crud.models import ClassRoom
+from crud.models import ClassRoom, Student
 
 
 class ClassRoomForm(forms.Form):
@@ -11,3 +11,8 @@ class ClassRoomModelForm(forms.ModelForm):
         model = ClassRoom
         fields = ["name", ]
 
+
+class StudentModelForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ["name", "email", "age", "classroom"]
