@@ -1,9 +1,10 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from crud.models import Student, ClassRoom
+from crud.models import Student, ClassRoom, StudentProfile
 
-from .serializers import ClassRoomSerializer, ClassRoomModelSerializer, StudentModelSerializer
+from .serializers import ClassRoomSerializer, ClassRoomModelSerializer, StudentModelSerializer, \
+    StudentProfileModelSerializer
 
 
 def hello_world(request):
@@ -130,7 +131,7 @@ class StudentDetailView(APIView):
 class StudentListView(APIView):
     def get(self, *args, **kwargs):
         students = Student.objects.all()
-        serializer = StudentModelSerializer(students, many=True)
+        serializer = StudentModelSerializer(students, many=True, context={"request": self.request})
         return Response(serializer.data)
 
     def post(self, *args, **kwargs):
@@ -143,3 +144,16 @@ class StudentListView(APIView):
         return Response({
             "detail": "Invalid request data"
         })
+
+
+class StudentProfileListView(APIView):
+    def get(self, *args, **kwargs):
+        profiles = StudentProfile.objects.all()
+        ser = StudentProfileModelSerializer(profiles, many=True, context={"request": self.request})
+        return Response(ser.data)
+
+    def post(self, *args, **kwargs):
+        ser = StudentProfileModelSerializer(data=self.request.data)
+        ser.is_valid(raise_exception=True)
+        ser.save()
+        return Response(ser.data)
