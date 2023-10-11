@@ -1,6 +1,10 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, \
+    DestroyAPIView
+
 from crud.models import Student, ClassRoom, StudentProfile
 
 from .serializers import ClassRoomSerializer, ClassRoomModelSerializer, StudentModelSerializer, \
@@ -40,7 +44,7 @@ class StudentFromDBView(APIView):
         except Student.DoesNotExist:
             return Response({
                 "detail": "Invalid Student ID"
-            })
+            }, status=status.HTTP_400_BAD_REQUEST)
         response = {
             "name": student.name,
             "email": student.email,
@@ -73,7 +77,7 @@ class StudentFromDBListView(APIView):
         Student.objects.create(name=name, email=email, age=age, classroom_id=classroom)
         return Response({
             "detail": "Student Created Successfully !!"
-        })
+        }, status=status.HTTP_201_CREATED)
 
 
 class ClassRoomFromDBView(APIView):
@@ -84,7 +88,7 @@ class ClassRoomFromDBView(APIView):
         except ClassRoom.DoesNotExist:
             return Response({
                 "detail": "Invalid Classroom ID"
-            })
+            }, status=status.HTTP_400_BAD_REQUEST)
         # response = {
         #     "name": classroom.name
         # }
@@ -107,10 +111,10 @@ class ClassRoomFromDBListView(APIView):
             serializer.save()
             return Response({
                 "detail": "Classroom Created Successfully !!"
-            })
+            }, status=201)
         return Response({
             "detail": "Invalid Request Data !!"
-        })
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 # StudentDetailView, StudentView
@@ -123,7 +127,7 @@ class StudentDetailView(APIView):
         except Student.DoesNotExist:
             return Response({
                 "detail": "Invalid Student ID"
-            })
+            }, status=status.HTTP_400_BAD_REQUEST)
         serializer = StudentModelSerializer(student)
         return Response(serializer.data)
 
@@ -140,10 +144,10 @@ class StudentListView(APIView):
             serializer.save()
             return Response({
                 "detail": "Student Added Successfully !!"
-            })
+            }, status=201)
         return Response({
             "detail": "Invalid request data"
-        })
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class StudentProfileListView(APIView):
@@ -156,4 +160,29 @@ class StudentProfileListView(APIView):
         ser = StudentProfileModelSerializer(data=self.request.data)
         ser.is_valid(raise_exception=True)
         ser.save()
-        return Response(ser.data)
+        return Response(ser.data, status=status.HTTP_201_CREATED)
+
+
+class ClassRoomAPIView(ListAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+
+class ClassRoomCreateAPIView(CreateAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+
+class ClassRoomUpdateAPIView(UpdateAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+
+class ClassRoomDetailAPIView(RetrieveAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+
+class ClassRoomDeleteAPIView(DestroyAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer

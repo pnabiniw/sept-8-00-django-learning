@@ -11,3 +11,6 @@
 23. Class Based
 23. Class Based Views
 24. Django Rest Framework
+25. Serializer
+26. Serializer get_fields
+27. Status Code and Generic Views

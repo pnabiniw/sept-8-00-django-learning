@@ -1,0 +1,16 @@
+1. When a request is made to the server in webapps it returns a reponse with a certain status code
+2. Based on this status codes Frontend / Mobile device acts accordingly in their application
+
+List of status codes
+200 => Success
+201 => Created
+204 => Content Not Available
+
+400 => Bad Request
+401 => UnAuthorized
+403 => Permission Not Allowed (Forbidden)
+404 => Not Found
+405 => Method Not Allowed
+
+500 => Internal Server Error
+502 => Bad Gateway
