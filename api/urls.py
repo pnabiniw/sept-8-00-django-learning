@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
 from .views import hello_world, HelloWorldView, SimpleStudentView, \
@@ -40,6 +41,7 @@ generic_urls = [
     path("generic-classroom-delete/<int:pk>/", ClassRoomDeleteAPIView.as_view()),
     path("generic-classroom/", ClassRoomListCreateAPIView.as_view()),
     path("generic-classroom/<int:pk>/", ClassRoomObjectAPIView.as_view()),
+    path("login/", obtain_auth_token)
 ]
 
 urlpatterns += generic_urls + router.urls

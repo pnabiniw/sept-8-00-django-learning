@@ -1,15 +1,18 @@
 from django.http import JsonResponse
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, \
     DestroyAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from crud.models import Student, ClassRoom, StudentProfile
 
 from .serializers import ClassRoomSerializer, ClassRoomModelSerializer, StudentModelSerializer, \
     StudentProfileModelSerializer
+from .permissions import IsAdminUser
 
 
 def hello_world(request):
@@ -202,3 +205,10 @@ class ClassRoomObjectAPIView(RetrieveUpdateDestroyAPIView):
 class ClassRoomViewSet(ModelViewSet):
     queryset = ClassRoom.objects.all()
     serializer_class = ClassRoomModelSerializer
+    # permission_classes = [IsAuthenticated, ]
+    # authentication_classes = [TokenAuthentication, ]
+
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [AllowAny(), ]
+        return [IsAdminUser(), ]
