@@ -7,6 +7,8 @@ from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, R
     DestroyAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 from crud.models import Student, ClassRoom, StudentProfile
 
@@ -137,6 +139,9 @@ class StudentDetailView(APIView):
 
 
 class StudentListView(APIView):
+    filter_backends = [DjangoFilterBackend, ]
+    filterset_fields = ["classroom_id", "classroom__name"]
+    permission_classes = [AllowAny, ]
     def get(self, *args, **kwargs):
         students = Student.objects.all()
         serializer = StudentModelSerializer(students, many=True, context={"request": self.request})
@@ -155,6 +160,7 @@ class StudentListView(APIView):
 
 
 class StudentProfileListView(APIView):
+    search_fields = ["contact", "student__name"]
     def get(self, *args, **kwargs):
         profiles = StudentProfile.objects.all()
         ser = StudentProfileModelSerializer(profiles, many=True, context={"request": self.request})
@@ -205,6 +211,9 @@ class ClassRoomObjectAPIView(RetrieveUpdateDestroyAPIView):
 class ClassRoomViewSet(ModelViewSet):
     queryset = ClassRoom.objects.all()
     serializer_class = ClassRoomModelSerializer
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ["name", ]
+    filterset_fields = []
     # permission_classes = [IsAuthenticated, ]
     # authentication_classes = [TokenAuthentication, ]
 

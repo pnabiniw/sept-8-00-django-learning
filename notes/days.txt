@@ -14,3 +14,6 @@
 25. Serializer
 26. Serializer get_fields
 27. Status Code and Generic Views
+28. ViewSet
+29. Authentication and Permissions
+30. Pagination, search, filter
