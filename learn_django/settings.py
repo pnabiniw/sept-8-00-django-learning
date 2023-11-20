@@ -26,7 +26,8 @@ INSTALLED_APPS = [
 
 PROJECT_APPS = ['myapp', 'temp_inheritance', 'tables', 'forms',
                 'crud', 'classbased', "api"]
-THIRD_PARTY_APP = ['django_extensions', "rest_framework", "rest_framework.authtoken", "django_filters"]
+THIRD_PARTY_APP = ['django_extensions', "rest_framework", "rest_framework.authtoken",
+                   "django_filters", "drf_yasg"]
 
 INSTALLED_APPS += PROJECT_APPS + THIRD_PARTY_APP
 
@@ -130,7 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated"
+        "rest_framework.permissions.AllowAny"
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication"

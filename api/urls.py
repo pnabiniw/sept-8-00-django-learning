@@ -7,10 +7,11 @@ from .views import hello_world, HelloWorldView, SimpleStudentView, \
     ClassRoomFromDBListView, StudentDetailView, StudentListView, \
     StudentProfileListView, ClassRoomAPIView, ClassRoomCreateAPIView, \
     ClassRoomUpdateAPIView, ClassRoomDetailAPIView, ClassRoomDeleteAPIView, \
-    ClassRoomListCreateAPIView, ClassRoomObjectAPIView, ClassRoomViewSet
+    ClassRoomListCreateAPIView, ClassRoomObjectAPIView, ClassRoomViewSet, ClassRoomListUpdateViewSet
 
 router = DefaultRouter()
 router.register("classroom-viewset", ClassRoomViewSet)
+router.register("classroom-list-update-viewset", ClassRoomListUpdateViewSet)
 
 # List
 # Create

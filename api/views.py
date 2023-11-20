@@ -15,6 +15,7 @@ from crud.models import Student, ClassRoom, StudentProfile
 from .serializers import ClassRoomSerializer, ClassRoomModelSerializer, StudentModelSerializer, \
     StudentProfileModelSerializer
 from .permissions import IsAdminUser
+from .viewsets import ListUpdateViewSet
 
 
 def hello_world(request):
@@ -221,3 +222,12 @@ class ClassRoomViewSet(ModelViewSet):
         if self.request.method == "GET":
             return [AllowAny(), ]
         return [IsAdminUser(), ]
+
+
+class ClassRoomListUpdateViewSet(ListUpdateViewSet):
+    serializer_class = ClassRoomModelSerializer
+    queryset = ClassRoom.objects.all()
+
+# 127.0.0.1:8000/api/student/
+# 127.0.0.1:8000/api/student/1/
+#
